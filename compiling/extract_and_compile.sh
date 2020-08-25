@@ -1,11 +1,13 @@
 #!/usr/bin/bash
 
-#Capturing arguments that will be used by the script
+##Copying the lab requirements above the lines of code that perform the given task may remove later.
 
-#The number used for our C program
+##Takes one argument, which is the number that will be used as an argument when you call the C program that you'll be compiling in a bit.
+
+#The number taken in and used for our C program
 arg_number=$1
-#The name used for the destination directory
-arg_dir=$2
+
+##Extracts the contents of the tar archive NthPrime.tgz into the current directory
 
 #Extracting the tar file contents into our desired directory
-tar xf $NthPrime --directory $arg_dir
+
