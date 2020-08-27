@@ -10,11 +10,11 @@ arg_number=$1
 ##Extracts the contents of the tar archive NthPrime.tgz into the NthPrime directory
 tar -zxf NthPrime.tgz --one-top-level
 
-#Go into the NthPrime directory
-cd NthPrime
+#Go into the NthPrime directory or exit if the command fails
+cd NthPrime || exit
 
 #Compile the source files into an exe (NthPrime)
 gcc main.c nth_prime.c -o NthPrime
 
 #Call the exe
-./NthPrime $arg_number
+./NthPrime "$arg_number"
