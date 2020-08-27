@@ -7,11 +7,14 @@
 #The number taken in and used for our C program
 arg_number=$1
 
-#Make a sub-directory to store extracted files
-mkdir NthPrime
-
 ##Extracts the contents of the tar archive NthPrime.tgz into the NthPrime directory
 tar -zxf NthPrime.tgz --one-top-level
 
-#Extracting the tar file contents into our desired directory
+#Go into the NthPrime directory
+cd NthPrime
 
+#Compile the source files into an exe (NthPrime)
+gcc main.c nth_prime.c -o NthPrime
+
+#Call the exe
+./NthPrime $arg_number
