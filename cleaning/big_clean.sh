@@ -28,7 +28,9 @@ base_tar=`basename $arg_tar`
 clean_name="cleaned_"
 clean_name+=$base_tar
 
-cd $base_tar
+cd $cleaning
+#This stuff worked when I ran it in the cleaning directory
+#tar -czf cleaned_little_dir.tgz -C /home/ben/Lab0/lab-0-command-line-introduction-Burge337/cleaning /tmp/tmp.zh1sbTcLRK/little_dir
 #Create a compressed archive of all the files that weren't deleted. Should be named based on the original tar file name
 #but prefix with cleaned_
-tar -czf $clean_name -C $cleaning .
+tar -czf $clean_name -C $cleaning $SCRATCH
