@@ -21,6 +21,9 @@ grep -lrIZ 'DELETE ME!' . | xargs -0 rm -f --
 #Grab the basename of the file in preperation of making our new, clean tar file
 base_tar=`basename $arg_tar`
 
+#Same thing but without the .tgz so we specify what to replace the whole path with
+base_tar_no_suffix=`basename -s .tgz $arg_tar`
+
 #Swap to the Scratch directory to make the new tar file
 #cd $SCRATCH || exit
 
@@ -28,9 +31,16 @@ base_tar=`basename $arg_tar`
 clean_name="cleaned_"
 clean_name+=$base_tar
 
-cd $cleaning
-#This stuff worked when I ran it in the cleaning directory
-#tar -czf cleaned_little_dir.tgz -C /home/ben/Lab0/lab-0-command-line-introduction-Burge337/cleaning /tmp/tmp.zh1sbTcLRK/little_dir
+#Change into the starting directory before we create our tar archive
+cd $cleaning || exit
+
 #Create a compressed archive of all the files that weren't deleted. Should be named based on the original tar file name
 #but prefix with cleaned_
-tar -czf $clean_name -C $cleaning $SCRATCH
+
+#This part was truly miserable to get working. Major credit to https://stackoverflow.com/a/27274924 for their
+#explanation.
+
+#I believe the -C $SCRATCH bit works by directing changing the directory that will be tarred before the process begins
+#whereupon it notices the $base_tar_no_suffix (this would be little_tar or big_tar) and changes the full path with just
+#that name instead.
+tar -czf $clean_name -C $SCRATCH $base_tar_no_suffix
